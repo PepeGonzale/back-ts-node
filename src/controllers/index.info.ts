@@ -1,13 +1,16 @@
 import { Request, Response } from "express"
-import getData from '../services/index.info'
+import {getData, insertData} from '../services/index.info'
 const getItems = async (req: Request, res: Response) => {
     try {
-       const response = await getData(req.body)
-       console.log(response)
+       const response = await getData(req)
        res.send(response)
    } catch(e) {
        console.log(res, "error get items")
    }
 }
+const postItem = async (req: Request, res: Response) => {
+    const response = await insertData(req.body)
+    res.send(response).status(200)
+}
 
-export default getItems
+export  {getItems, postItem}
